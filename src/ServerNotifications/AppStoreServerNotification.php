@@ -73,11 +73,16 @@ class AppStoreServerNotification implements ServerNotificationContract
     public function getAutoRenewStatusChangeDate(): ?Time
     {
         $time = $this->notification->getAutoRenewStatusChangeDate();
-        if (! is_null($time)) {
+        if (!is_null($time)) {
             return Time::fromAppStoreTime($time);
         }
 
         return null;
+    }
+
+    public function getNotification()
+    {
+        return $this->notification;
     }
 
     /**

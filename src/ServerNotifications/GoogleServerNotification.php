@@ -68,4 +68,9 @@ class GoogleServerNotification implements ServerNotificationContract
     {
         return $this->notification->getPackageName();
     }
+
+    public function getNotification()
+    {
+        return $this->notification;
+    }
 }
