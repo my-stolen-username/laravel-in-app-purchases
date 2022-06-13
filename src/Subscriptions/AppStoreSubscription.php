@@ -2,22 +2,22 @@
 
 namespace Imdhemy\Purchases\Subscriptions;
 
-use Imdhemy\AppStore\ValueObjects\ReceiptInfo;
+use Imdhemy\AppStore\ValueObjects\LatestReceiptInfo;
 use Imdhemy\Purchases\Contracts\SubscriptionContract;
 use Imdhemy\Purchases\ValueObjects\Time;
 
 class AppStoreSubscription implements SubscriptionContract
 {
     /**
-     * @var ReceiptInfo
+     * @var LatestReceiptInfo
      */
     private $receipt;
 
     /**
      * AppStoreSubscription constructor.
-     * @param ReceiptInfo $receipt
+     * @param LatestReceiptInfo $receipt
      */
-    public function __construct(ReceiptInfo $receipt)
+    public function __construct(LatestReceiptInfo $receipt)
     {
         $this->receipt = $receipt;
     }

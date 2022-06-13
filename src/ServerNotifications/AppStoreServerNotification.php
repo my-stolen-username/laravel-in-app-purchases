@@ -4,7 +4,7 @@ namespace Imdhemy\Purchases\ServerNotifications;
 
 use GuzzleHttp\Client;
 use Imdhemy\AppStore\ServerNotifications\ServerNotification;
-use Imdhemy\AppStore\ValueObjects\ReceiptInfo;
+use Imdhemy\AppStore\ValueObjects\LatestReceiptInfo;
 use Imdhemy\Purchases\Contracts\ServerNotificationContract;
 use Imdhemy\Purchases\Contracts\SubscriptionContract;
 use Imdhemy\Purchases\Subscriptions\AppStoreSubscription;
@@ -52,9 +52,9 @@ class AppStoreServerNotification implements ServerNotificationContract
     }
 
     /**
-     * @return ReceiptInfo
+     * @return  LatestReceiptInfo
      */
-    private function getFirstReceipt(): ReceiptInfo
+    private function getFirstReceipt(): ?LatestReceiptInfo
     {
         return $this->notification->getUnifiedReceipt()->getLatestReceiptInfo()[0];
     }
@@ -64,7 +64,7 @@ class AppStoreServerNotification implements ServerNotificationContract
      */
     public function isAutoRenewal(): bool
     {
-        return $this->notification->isAutoRenewStatus();
+        return $this->notification->getAutoRenewStatus() == 1;
     }
 
     /**
@@ -73,7 +73,7 @@ class AppStoreServerNotification implements ServerNotificationContract
     public function getAutoRenewStatusChangeDate(): ?Time
     {
         $time = $this->notification->getAutoRenewStatusChangeDate();
-        if (!is_null($time)) {
+        if (! is_null($time)) {
             return Time::fromAppStoreTime($time);
         }
 
